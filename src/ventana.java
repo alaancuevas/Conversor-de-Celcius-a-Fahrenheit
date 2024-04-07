@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
  */
 public class ventana extends javax.swing.JFrame {
 
+    int xMouse, yMouse;
     /**
      * Creates new form conversorPantalla
      */
@@ -42,18 +43,18 @@ public class ventana extends javax.swing.JFrame {
         jpventana4 = new javax.swing.JPanel();
         jlcerrarResultado = new javax.swing.JLabel();
         jltituloResultado = new javax.swing.JLabel();
-        jpinterfaz = new javax.swing.JPanel();
-        jpventana = new javax.swing.JPanel();
-        jltitulo = new javax.swing.JLabel();
-        jlcerrarVentana = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jpinterfazPrincipal = new javax.swing.JPanel();
+        jpbarraTitulo = new javax.swing.JPanel();
+        jlbotonCerrar = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jpbotonAplicar = new javax.swing.JPanel();
+        jlbotonAplicar = new javax.swing.JLabel();
+        jltextoInterfaz = new javax.swing.JLabel();
         jtgrados = new javax.swing.JTextField();
-        jpaplicar = new javax.swing.JPanel();
-        jlaplicar = new javax.swing.JLabel();
 
         ventanaError.setAlwaysOnTop(true);
         ventanaError.setBackground(new java.awt.Color(204, 204, 204));
-        ventanaError.setLocationByPlatform(true);
         ventanaError.setModal(true);
         ventanaError.setUndecorated(true);
         ventanaError.setPreferredSize(new java.awt.Dimension(330, 100));
@@ -157,7 +158,6 @@ public class ventana extends javax.swing.JFrame {
 
         ventanaResultado.setAlwaysOnTop(true);
         ventanaResultado.setBackground(new java.awt.Color(204, 204, 204));
-        ventanaResultado.setLocationByPlatform(true);
         ventanaResultado.setMaximumSize(new java.awt.Dimension(330, 115));
         ventanaResultado.setMinimumSize(new java.awt.Dimension(330, 115));
         ventanaResultado.setUndecorated(true);
@@ -253,206 +253,153 @@ public class ventana extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jLabel1.setText("jLabel1");
+
         setBackground(new java.awt.Color(204, 204, 204));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setForeground(new java.awt.Color(204, 204, 204));
+        setLocationByPlatform(true);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(300, 380));
         setResizable(false);
         setSize(new java.awt.Dimension(300, 380));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpinterfaz.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jpinterfaz.setMaximumSize(new java.awt.Dimension(300, 380));
-        jpinterfaz.setMinimumSize(new java.awt.Dimension(300, 380));
-        jpinterfaz.setPreferredSize(new java.awt.Dimension(300, 380));
+        jpinterfazPrincipal.setBackground(new java.awt.Color(204, 204, 204));
+        jpinterfazPrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jpventana.setBackground(new java.awt.Color(102, 102, 255));
-        jpventana.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        jpventana.setMaximumSize(new java.awt.Dimension(300, 40));
-        jpventana.setMinimumSize(new java.awt.Dimension(298, 40));
-        jpventana.setName(""); // NOI18N
-        jpventana.setPreferredSize(new java.awt.Dimension(299, 40));
-        jpventana.setVerifyInputWhenFocusTarget(false);
-
-        jltitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jltitulo.setText("Conversor");
-
-        jlcerrarVentana.setBackground(new java.awt.Color(0, 0, 0));
-        jlcerrarVentana.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 24)); // NOI18N
-        jlcerrarVentana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlcerrarVentana.setText("X");
-        jlcerrarVentana.setMaximumSize(new java.awt.Dimension(40, 30));
-        jlcerrarVentana.setMinimumSize(new java.awt.Dimension(40, 30));
-        jlcerrarVentana.setPreferredSize(new java.awt.Dimension(40, 30));
-        jlcerrarVentana.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlcerrarVentanaMouseClicked(evt);
+        jpbarraTitulo.setBackground(new java.awt.Color(102, 102, 255));
+        jpbarraTitulo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        jpbarraTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jpbarraTituloMouseDragged(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlcerrarVentanaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlcerrarVentanaMouseExited(evt);
+        });
+        jpbarraTitulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jpbarraTituloMousePressed(evt);
             }
         });
 
-        javax.swing.GroupLayout jpventanaLayout = new javax.swing.GroupLayout(jpventana);
-        jpventana.setLayout(jpventanaLayout);
-        jpventanaLayout.setHorizontalGroup(
-            jpventanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpventanaLayout.createSequentialGroup()
+        jlbotonCerrar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jlbotonCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbotonCerrar.setText("X");
+        jlbotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbotonCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlbotonCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlbotonCerrarMouseExited(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Krub Medium", 0, 18)); // NOI18N
+        jLabel3.setText("Conversor");
+
+        javax.swing.GroupLayout jpbarraTituloLayout = new javax.swing.GroupLayout(jpbarraTitulo);
+        jpbarraTitulo.setLayout(jpbarraTituloLayout);
+        jpbarraTituloLayout.setHorizontalGroup(
+            jpbarraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpbarraTituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jltitulo)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlcerrarVentana, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jlbotonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jpventanaLayout.setVerticalGroup(
-            jpventanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpventanaLayout.createSequentialGroup()
+        jpbarraTituloLayout.setVerticalGroup(
+            jpbarraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpbarraTituloLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jlbotonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jpbarraTituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jltitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jlcerrarVentana, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Ingresa grados en Celcius:");
-
-        jtgrados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtgrados.setAutoscrolls(false);
-
-        jpaplicar.setBackground(new java.awt.Color(102, 102, 255));
-        jpaplicar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jpaplicar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jpbotonAplicar.setBackground(new java.awt.Color(102, 102, 255));
+        jpbotonAplicar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jpbotonAplicar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jpaplicarMouseClicked(evt);
+                jpbotonAplicarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jpaplicarMouseEntered(evt);
+                jpbotonAplicarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jpaplicarMouseExited(evt);
+                jpbotonAplicarMouseExited(evt);
             }
         });
 
-        jlaplicar.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jlaplicar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlaplicar.setText("Aplicar");
+        jlbotonAplicar.setFont(new java.awt.Font("Krub Light", 1, 18)); // NOI18N
+        jlbotonAplicar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbotonAplicar.setText("Aplicar");
 
-        javax.swing.GroupLayout jpaplicarLayout = new javax.swing.GroupLayout(jpaplicar);
-        jpaplicar.setLayout(jpaplicarLayout);
-        jpaplicarLayout.setHorizontalGroup(
-            jpaplicarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpaplicarLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpbotonAplicarLayout = new javax.swing.GroupLayout(jpbotonAplicar);
+        jpbotonAplicar.setLayout(jpbotonAplicarLayout);
+        jpbotonAplicarLayout.setHorizontalGroup(
+            jpbotonAplicarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpbotonAplicarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlaplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbotonAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jpaplicarLayout.setVerticalGroup(
-            jpaplicarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpaplicarLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jlaplicar)
-                .addContainerGap(14, Short.MAX_VALUE))
+        jpbotonAplicarLayout.setVerticalGroup(
+            jpbotonAplicarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpbotonAplicarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbotonAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout jpinterfazLayout = new javax.swing.GroupLayout(jpinterfaz);
-        jpinterfaz.setLayout(jpinterfazLayout);
-        jpinterfazLayout.setHorizontalGroup(
-            jpinterfazLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpinterfazLayout.createSequentialGroup()
+        jltextoInterfaz.setFont(new java.awt.Font("Krub Light", 0, 18)); // NOI18N
+        jltextoInterfaz.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jltextoInterfaz.setText("Ingresa grados a convertir");
+
+        jtgrados.setFont(new java.awt.Font("Krub Medium", 0, 18)); // NOI18N
+        jtgrados.setForeground(new java.awt.Color(51, 51, 51));
+        jtgrados.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtgrados.setBorder(null);
+        jtgrados.setCaretColor(new java.awt.Color(204, 204, 204));
+        jtgrados.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jtgrados.setSelectedTextColor(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout jpinterfazPrincipalLayout = new javax.swing.GroupLayout(jpinterfazPrincipal);
+        jpinterfazPrincipal.setLayout(jpinterfazPrincipalLayout);
+        jpinterfazPrincipalLayout.setHorizontalGroup(
+            jpinterfazPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpbarraTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpinterfazPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpinterfazPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jltextoInterfaz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpbotonAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpinterfazPrincipalLayout.createSequentialGroup()
+                        .addGap(0, 31, Short.MAX_VALUE)
+                        .addComponent(jtgrados, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
                 .addContainerGap())
-            .addGroup(jpinterfazLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jtgrados, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
-            .addComponent(jpventana, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-            .addGroup(jpinterfazLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpinterfazLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jpaplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
-        jpinterfazLayout.setVerticalGroup(
-            jpinterfazLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpinterfazLayout.createSequentialGroup()
-                .addComponent(jpventana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+        jpinterfazPrincipalLayout.setVerticalGroup(
+            jpinterfazPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpinterfazPrincipalLayout.createSequentialGroup()
+                .addComponent(jpbarraTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91)
+                .addComponent(jltextoInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtgrados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(174, 174, 174))
-            .addGroup(jpinterfazLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpinterfazLayout.createSequentialGroup()
-                    .addContainerGap(324, Short.MAX_VALUE)
-                    .addComponent(jpaplicar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addComponent(jtgrados, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addComponent(jpbotonAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpinterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpinterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(jpinterfazPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 380));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jlcerrarVentanaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlcerrarVentanaMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jlcerrarVentanaMouseClicked
-
-    private void jlcerrarVentanaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlcerrarVentanaMouseEntered
-        // TODO add your handling code here:
-        jlcerrarVentana.setForeground(Color.white);
-    }//GEN-LAST:event_jlcerrarVentanaMouseEntered
-
-    private void jlcerrarVentanaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlcerrarVentanaMouseExited
-        // TODO add your handling code here:
-        jlcerrarVentana.setForeground(Color.black);
-    }//GEN-LAST:event_jlcerrarVentanaMouseExited
-
-    private void jpaplicarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpaplicarMouseEntered
-        // TODO add your handling code here:
-        String colorhex = "#6682FF";
-        Color azulEdit = Color.decode(colorhex);
-        jpaplicar.setBackground(azulEdit);
-    }//GEN-LAST:event_jpaplicarMouseEntered
-
-    private void jpaplicarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpaplicarMouseExited
-        // TODO add your handling code here:        
-        String colorhex = "#6666FF";
-        Color azulNormal = Color.decode(colorhex);
-        jpaplicar.setBackground(azulNormal);
-    }//GEN-LAST:event_jpaplicarMouseExited
-
-    private void jpaplicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpaplicarMouseClicked
-        // TODO add your handling code here:
-        Pattern p = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
-        Matcher m = p.matcher(jtgrados.getText());
-        if (!m.matches()) {
-            ventanaError.setLocationRelativeTo(null);
-            ventanaError.setVisible(true);
-            jtgrados.setText("");
-            jtgrados.requestFocus();
-            return;
-        }else{
-            double num = Double.parseDouble(jtgrados.getText());
-            double resultado = num * 9/5 + 32;
-            ventanaResultado.setLocationRelativeTo(null);
-            ventanaResultado.setVisible(true);
-            jlmessageResultado.setText(resultado + "° Fahrenheit.");
-        }
-    }//GEN-LAST:event_jpaplicarMouseClicked
 
     private void jlcerrarResultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlcerrarResultadoMouseClicked
         // TODO add your handling code here:
@@ -483,6 +430,56 @@ public class ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         jlcerrarError.setForeground(Color.black);
     }//GEN-LAST:event_jlcerrarErrorMouseExited
+
+    private void jlbotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbotonCerrarMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jlbotonCerrarMouseClicked
+
+    private void jpbarraTituloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbarraTituloMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_jpbarraTituloMousePressed
+
+    private void jpbarraTituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbarraTituloMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation( x - xMouse, y - yMouse);
+    }//GEN-LAST:event_jpbarraTituloMouseDragged
+
+    private void jlbotonCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbotonCerrarMouseEntered
+        jlbotonCerrar.setForeground(Color.white);
+    }//GEN-LAST:event_jlbotonCerrarMouseEntered
+
+    private void jlbotonCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbotonCerrarMouseExited
+        jlbotonCerrar.setForeground(Color.black);
+    }//GEN-LAST:event_jlbotonCerrarMouseExited
+
+    private void jpbotonAplicarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbotonAplicarMouseEntered
+        jpbotonAplicar.setBackground(new Color(115, 115, 255));
+    }//GEN-LAST:event_jpbotonAplicarMouseEntered
+
+    private void jpbotonAplicarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbotonAplicarMouseExited
+        jpbotonAplicar.setBackground(new Color(102, 102, 255));
+    }//GEN-LAST:event_jpbotonAplicarMouseExited
+
+    private void jpbotonAplicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbotonAplicarMouseClicked
+        Pattern p = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
+        Matcher m = p.matcher(jtgrados.getText());
+        if (!m.matches()) {
+            ventanaError.setLocationRelativeTo(null);
+            ventanaError.setVisible(true);
+            jtgrados.setText("");
+            jtgrados.requestFocus();
+            return;
+        }else{
+            double num = Double.parseDouble(jtgrados.getText());
+            double resultado = num * 9/5 + 32;
+            ventanaResultado.setLocationRelativeTo(null);
+            ventanaResultado.setVisible(true);
+            jlmessageResultado.setText(resultado + "° Fahrenheit.");
+        }
+    }//GEN-LAST:event_jpbotonAplicarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -522,19 +519,23 @@ public class ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel jlaplicar;
+    private javax.swing.JLabel jlbotonAplicar;
+    private javax.swing.JLabel jlbotonCerrar;
     private javax.swing.JLabel jlcerrarError;
     private javax.swing.JLabel jlcerrarResultado;
     private javax.swing.JLabel jlcerrarVentana;
     private javax.swing.JLabel jlmessageResultado;
     private javax.swing.JLabel jlmessageResultado1;
+    private javax.swing.JLabel jltextoInterfaz;
     private javax.swing.JLabel jltitulo;
     private javax.swing.JLabel jltituloError;
     private javax.swing.JLabel jltituloResultado;
-    private javax.swing.JPanel jpaplicar;
-    private javax.swing.JPanel jpinterfaz;
+    private javax.swing.JPanel jpbarraTitulo;
+    private javax.swing.JPanel jpbotonAplicar;
     private javax.swing.JPanel jpinterfazError;
+    private javax.swing.JPanel jpinterfazPrincipal;
     private javax.swing.JPanel jpventana;
     private javax.swing.JPanel jpventana3;
     private javax.swing.JPanel jpventana4;
