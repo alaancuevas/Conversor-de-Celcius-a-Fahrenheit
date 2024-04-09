@@ -1,5 +1,6 @@
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,7 +58,6 @@ public class ventana extends javax.swing.JFrame {
         ventanaError.setBackground(new java.awt.Color(204, 204, 204));
         ventanaError.setModal(true);
         ventanaError.setUndecorated(true);
-        ventanaError.setPreferredSize(new java.awt.Dimension(330, 100));
         ventanaError.setResizable(false);
         ventanaError.setSize(new java.awt.Dimension(330, 100));
         ventanaError.setType(java.awt.Window.Type.POPUP);
@@ -158,10 +158,8 @@ public class ventana extends javax.swing.JFrame {
 
         ventanaResultado.setAlwaysOnTop(true);
         ventanaResultado.setBackground(new java.awt.Color(204, 204, 204));
-        ventanaResultado.setMaximumSize(new java.awt.Dimension(330, 115));
         ventanaResultado.setMinimumSize(new java.awt.Dimension(330, 115));
         ventanaResultado.setUndecorated(true);
-        ventanaResultado.setPreferredSize(new java.awt.Dimension(300, 115));
         ventanaResultado.setResizable(false);
         ventanaResultado.setSize(new java.awt.Dimension(330, 115));
         ventanaResultado.setType(java.awt.Window.Type.POPUP);
@@ -188,6 +186,7 @@ public class ventana extends javax.swing.JFrame {
         jlcerrarResultado.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 24)); // NOI18N
         jlcerrarResultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlcerrarResultado.setText("X");
+        jlcerrarResultado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jlcerrarResultado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jlcerrarResultadoMouseClicked(evt);
@@ -409,6 +408,7 @@ public class ventana extends javax.swing.JFrame {
     private void jlcerrarResultadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlcerrarResultadoMouseEntered
         // TODO add your handling code here:
         jlcerrarResultado.setForeground(Color.white);
+        jtgrados.setText("");
     }//GEN-LAST:event_jlcerrarResultadoMouseEntered
 
     private void jlcerrarResultadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlcerrarResultadoMouseExited
@@ -449,6 +449,7 @@ public class ventana extends javax.swing.JFrame {
 
     private void jlbotonCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbotonCerrarMouseEntered
         jlbotonCerrar.setForeground(Color.white);
+        
     }//GEN-LAST:event_jlbotonCerrarMouseEntered
 
     private void jlbotonCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbotonCerrarMouseExited
@@ -525,18 +526,15 @@ public class ventana extends javax.swing.JFrame {
     private javax.swing.JLabel jlbotonCerrar;
     private javax.swing.JLabel jlcerrarError;
     private javax.swing.JLabel jlcerrarResultado;
-    private javax.swing.JLabel jlcerrarVentana;
     private javax.swing.JLabel jlmessageResultado;
     private javax.swing.JLabel jlmessageResultado1;
     private javax.swing.JLabel jltextoInterfaz;
-    private javax.swing.JLabel jltitulo;
     private javax.swing.JLabel jltituloError;
     private javax.swing.JLabel jltituloResultado;
     private javax.swing.JPanel jpbarraTitulo;
     private javax.swing.JPanel jpbotonAplicar;
     private javax.swing.JPanel jpinterfazError;
     private javax.swing.JPanel jpinterfazPrincipal;
-    private javax.swing.JPanel jpventana;
     private javax.swing.JPanel jpventana3;
     private javax.swing.JPanel jpventana4;
     private javax.swing.JTextField jtgrados;
