@@ -37,7 +37,7 @@ public class ventana extends javax.swing.JFrame {
         jpventana3 = new javax.swing.JPanel();
         jlcerrarError = new javax.swing.JLabel();
         jltituloError = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jlmessageError = new javax.swing.JLabel();
         ventanaResultado = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jlmessageResultado = new javax.swing.JLabel();
@@ -121,9 +121,9 @@ public class ventana extends javax.swing.JFrame {
             .addComponent(jltituloError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
         );
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Completa los campos antes de continuar.");
-        jLabel2.setToolTipText("Ejemplo: 32.6 o 32");
+        jlmessageError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlmessageError.setText("Completa los campos antes de continuar.");
+        jlmessageError.setToolTipText("Ejemplo: 32.6 o 32");
 
         javax.swing.GroupLayout jpinterfazErrorLayout = new javax.swing.GroupLayout(jpinterfazError);
         jpinterfazError.setLayout(jpinterfazErrorLayout);
@@ -131,7 +131,7 @@ public class ventana extends javax.swing.JFrame {
             jpinterfazErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpinterfazErrorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                .addComponent(jlmessageError, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jpinterfazErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jpventana3, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE))
@@ -140,7 +140,7 @@ public class ventana extends javax.swing.JFrame {
             jpinterfazErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpinterfazErrorLayout.createSequentialGroup()
                 .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(jlmessageError)
                 .addGap(21, 21, 21))
             .addGroup(jpinterfazErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpinterfazErrorLayout.createSequentialGroup()
@@ -500,10 +500,24 @@ public class ventana extends javax.swing.JFrame {
 
     private void jpbotonAplicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbotonAplicarMouseClicked
         if (jtgrados.getText().isEmpty()) {
-            verificar();
-        } else{
-            iniciarConvertir();
+            jlmessageError.setText("Debe ingresar un numero.");
+            ventanaError.setLocationRelativeTo(null);
+            ventanaError.setVisible(true);
+            jtgrados.setText("");
+            jtgrados.requestFocus();
+            return;
         }
+        try {
+            Double.parseDouble(jtgrados.getText());
+        } catch (NumberFormatException e) {
+            jlmessageError.setText("Entrada no valida. Ingrese un numero.");
+            ventanaError.setLocationRelativeTo(null);
+            ventanaError.setVisible(true);
+            jtgrados.setText("");
+            jtgrados.requestFocus();
+            return;
+        }
+        iniciarConvertir();
     }//GEN-LAST:event_jpbotonAplicarMouseClicked
 
     private void jradiusCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jradiusCActionPerformed
@@ -561,13 +575,13 @@ public class ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlbotonAplicar;
     private javax.swing.JLabel jlbotonCerrar;
     private javax.swing.JLabel jlcerrarError;
     private javax.swing.JLabel jlcerrarResultado;
+    private javax.swing.JLabel jlmessageError;
     private javax.swing.JLabel jlmessageResultado;
     private javax.swing.JLabel jlmessageResultado1;
     private javax.swing.JLabel jltextoInterfaz;
@@ -599,18 +613,6 @@ public class ventana extends javax.swing.JFrame {
             ventanaResultado.setLocationRelativeTo(null);
             ventanaResultado.setVisible(true);
             jlmessageResultado.setText(resultado + "° Celcius.");
-        }
-    }
-
-    private void verificar() {
-        Pattern p = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
-        Matcher m = p.matcher(jtgrados.getText());
-        if (!m.matches()) {
-                ventanaError.setLocationRelativeTo(null);
-                ventanaError.setVisible(true);
-                jtgrados.setText("");
-                jtgrados.requestFocus();
-                return;
         }
     }
 }
