@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 public class ventana extends javax.swing.JFrame {
 
     int xMouse, yMouse;
+
     /**
      * Creates new form conversorPantalla
      */
@@ -53,6 +54,8 @@ public class ventana extends javax.swing.JFrame {
         jlbotonAplicar = new javax.swing.JLabel();
         jltextoInterfaz = new javax.swing.JLabel();
         jtgrados = new javax.swing.JTextField();
+        jradiusC = new javax.swing.JRadioButton();
+        jradiusF = new javax.swing.JRadioButton();
 
         ventanaError.setAlwaysOnTop(true);
         ventanaError.setBackground(new java.awt.Color(204, 204, 204));
@@ -119,7 +122,7 @@ public class ventana extends javax.swing.JFrame {
         );
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Ingresa grados a convertir con o sin punto.");
+        jLabel2.setText("Completa los campos antes de continuar.");
         jLabel2.setToolTipText("Ejemplo: 32.6 o 32");
 
         javax.swing.GroupLayout jpinterfazErrorLayout = new javax.swing.GroupLayout(jpinterfazError);
@@ -364,6 +367,26 @@ public class ventana extends javax.swing.JFrame {
         jtgrados.setCaretColor(new java.awt.Color(204, 204, 204));
         jtgrados.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         jtgrados.setSelectedTextColor(new java.awt.Color(204, 204, 204));
+        jtgrados.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtgradosFocusLost(evt);
+            }
+        });
+
+        jradiusC.setSelected(true);
+        jradiusC.setText("C");
+        jradiusC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jradiusCActionPerformed(evt);
+            }
+        });
+
+        jradiusF.setText("F");
+        jradiusF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jradiusFActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpinterfazPrincipalLayout = new javax.swing.GroupLayout(jpinterfazPrincipal);
         jpinterfazPrincipal.setLayout(jpinterfazPrincipalLayout);
@@ -376,8 +399,15 @@ public class ventana extends javax.swing.JFrame {
                     .addComponent(jltextoInterfaz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpbotonAplicar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpinterfazPrincipalLayout.createSequentialGroup()
-                        .addGap(0, 31, Short.MAX_VALUE)
-                        .addComponent(jtgrados, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jpinterfazPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jpinterfazPrincipalLayout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addComponent(jradiusC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(33, 33, 33)
+                                .addComponent(jradiusF, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jpinterfazPrincipalLayout.createSequentialGroup()
+                                .addGap(0, 31, Short.MAX_VALUE)
+                                .addComponent(jtgrados, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26)))
                 .addContainerGap())
         );
@@ -389,7 +419,11 @@ public class ventana extends javax.swing.JFrame {
                 .addComponent(jltextoInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtgrados, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jpinterfazPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jradiusC)
+                    .addComponent(jradiusF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(jpbotonAplicar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -444,12 +478,12 @@ public class ventana extends javax.swing.JFrame {
     private void jpbarraTituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbarraTituloMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        this.setLocation( x - xMouse, y - yMouse);
+        this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jpbarraTituloMouseDragged
 
     private void jlbotonCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbotonCerrarMouseEntered
         jlbotonCerrar.setForeground(Color.white);
-        
+
     }//GEN-LAST:event_jlbotonCerrarMouseEntered
 
     private void jlbotonCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbotonCerrarMouseExited
@@ -465,22 +499,30 @@ public class ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jpbotonAplicarMouseExited
 
     private void jpbotonAplicarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpbotonAplicarMouseClicked
-        Pattern p = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
-        Matcher m = p.matcher(jtgrados.getText());
-        if (!m.matches()) {
-            ventanaError.setLocationRelativeTo(null);
-            ventanaError.setVisible(true);
-            jtgrados.setText("");
-            jtgrados.requestFocus();
-            return;
-        }else{
-            double num = Double.parseDouble(jtgrados.getText());
-            double resultado = num * 9/5 + 32;
-            ventanaResultado.setLocationRelativeTo(null);
-            ventanaResultado.setVisible(true);
-            jlmessageResultado.setText(resultado + "° Fahrenheit.");
+        if (jtgrados.getText().isEmpty()) {
+            verificar();
+        } else{
+            iniciarConvertir();
         }
     }//GEN-LAST:event_jpbotonAplicarMouseClicked
+
+    private void jradiusCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jradiusCActionPerformed
+        // TODO add your handling code here:
+        if (jradiusF.isSelected()) {
+            jradiusF.setSelected(false);
+        }
+    }//GEN-LAST:event_jradiusCActionPerformed
+
+    private void jradiusFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jradiusFActionPerformed
+        // TODO add your handling code here:
+        if (jradiusC.isSelected()) {
+            jradiusC.setSelected(false);
+        }
+    }//GEN-LAST:event_jradiusFActionPerformed
+
+    private void jtgradosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtgradosFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtgradosFocusLost
 
     /**
      * @param args the command line arguments
@@ -537,9 +579,38 @@ public class ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jpinterfazPrincipal;
     private javax.swing.JPanel jpventana3;
     private javax.swing.JPanel jpventana4;
+    private javax.swing.JRadioButton jradiusC;
+    private javax.swing.JRadioButton jradiusF;
     private javax.swing.JTextField jtgrados;
     private javax.swing.JDialog ventanaError;
     private javax.swing.JDialog ventanaResultado;
     // End of variables declaration//GEN-END:variables
 
+    private void iniciarConvertir() {
+        if (jradiusC.isSelected()) {
+            double num = Double.parseDouble(jtgrados.getText());
+            double resultado = num * 9 / 5 + 32;
+            ventanaResultado.setLocationRelativeTo(null);
+            ventanaResultado.setVisible(true);
+            jlmessageResultado.setText(resultado + "° Fahrenheit.");
+        } else if (jradiusF.isSelected()) {
+            double num = Double.parseDouble(jtgrados.getText());
+            double resultado = num - 32 * 5 / 9;
+            ventanaResultado.setLocationRelativeTo(null);
+            ventanaResultado.setVisible(true);
+            jlmessageResultado.setText(resultado + "° Celcius.");
+        }
+    }
+
+    private void verificar() {
+        Pattern p = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
+        Matcher m = p.matcher(jtgrados.getText());
+        if (!m.matches()) {
+                ventanaError.setLocationRelativeTo(null);
+                ventanaError.setVisible(true);
+                jtgrados.setText("");
+                jtgrados.requestFocus();
+                return;
+        }
+    }
 }

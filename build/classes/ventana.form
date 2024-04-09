@@ -169,7 +169,7 @@
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Ingresa grados a convertir con o sin punto."/>
+                <Property name="text" type="java.lang.String" value="Completa los campos antes de continuar."/>
                 <Property name="toolTipText" type="java.lang.String" value="Ejemplo: 32.6 o 32"/>
               </Properties>
             </Component>
@@ -410,17 +410,27 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jpbarraTitulo" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jltextoInterfaz" alignment="0" max="32767" attributes="0"/>
                       <Component id="jpbotonAplicar" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
-                          <Component id="jtgrados" min="-2" pref="229" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                                  <Component id="jradiusC" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="jradiusF" min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
+                                  <Component id="jtgrados" min="-2" pref="229" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -432,7 +442,12 @@
                   <Component id="jltextoInterfaz" min="-2" pref="29" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jtgrados" min="-2" pref="35" max="-2" attributes="0"/>
-                  <EmptySpace pref="130" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jradiusC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jradiusF" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="91" max="32767" attributes="0"/>
                   <Component id="jpbotonAplicar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -584,6 +599,26 @@
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtgradosFocusLost"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="jradiusC">
+          <Properties>
+            <Property name="selected" type="boolean" value="true"/>
+            <Property name="text" type="java.lang.String" value="C"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jradiusCActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JRadioButton" name="jradiusF">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="F"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jradiusFActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
