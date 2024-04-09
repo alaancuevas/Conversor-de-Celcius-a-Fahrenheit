@@ -595,7 +595,7 @@ public class ventana extends javax.swing.JFrame {
             jlmessageResultado.setText(resultado + "° Fahrenheit.");
         } else if (jradiusF.isSelected()) {
             double num = Double.parseDouble(jtgrados.getText());
-            double resultado = num - 32 * 5 / 9;
+            double resultado = (num - 32) * 5.0 / 9.0;
             ventanaResultado.setLocationRelativeTo(null);
             ventanaResultado.setVisible(true);
             jlmessageResultado.setText(resultado + "° Celcius.");
